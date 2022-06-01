@@ -2,7 +2,7 @@
 
 int main()
 {
-    const long double km_in_mile = 1609.0;
+    const long double km_in_mile = 1.609;
     long double miles = 0.0;
     cout << "Введите количество миль с точностью до сотых:\n";
     cin >> miles;
