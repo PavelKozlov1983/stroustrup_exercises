@@ -1,5 +1,31 @@
 #include "std_lib_facilities.h"
 
+void coins_naming (const int & coin_num, const string & coin_name)
+{
+    string ending_one = "овая монета";
+    string ending_two_four = "овые монеты";
+    string ending_others = "овых монет";
+    cout << " У вас ";
+    if (coin_num != 0)
+    {
+        cout << coin_num << coin_name;
+    if (coin_num % 10 == 1 &&  coin_num != 11)
+        cout << ending_one;
+    else if (coin_num % 10 == 2 && coin_num != 12)
+        cout << ending_two_four;
+    else if (coin_num % 10 == 3 && coin_num != 13)
+        cout << ending_two_four;
+    else if (coin_num % 10 == 4 && coin_num != 14)
+        cout << ending_two_four;
+    else
+        cout << ending_others;
+    }
+    else
+        cout << "";
+    cout << "\n";
+}
+
+
 int main()
 {
     int coin = 0;
@@ -15,9 +41,6 @@ int main()
     string quarter_str = " двадцатипятицент";
     string half_dollar_str = " пятидесятицент";
     string dollar_str = " доллар";
-    string ending_one = "овая монета";
-    string ending_two_four = "овые монеты";
-    string ending_others = "овых монет";
     
     cout << "Введите количество одноцентовых монет:\n";
     cin >> coin;
@@ -37,119 +60,12 @@ int main()
     cout << "Введите количество долларовых монет:\n";
     cin >> dollar;
     
-    cout << " У вас ";
-    if (coin != 0)
-    {
-        cout << coin << coin_str;
-    if (coin % 10 == 1 &&  coin != 11)
-        cout << ending_one;
-    else if (coin % 10 == 2 && coin != 12)
-        cout << ending_two_four;
-    else if (coin % 10 == 3 && coin != 13)
-        cout << ending_two_four;
-    else if (coin % 10 == 4 && coin != 14)
-        cout << ending_two_four;
-    else
-        cout << ending_others;
-    }
-    else
-        cout << "";
-    cout << "\n";
-    
-    cout << " У вас ";
-    if (nickel != 0)
-    {
-        cout << nickel << nickel_str;
-    if (nickel % 10 == 1 &&  nickel != 11)
-        cout << ending_one;
-    else if (nickel % 10 == 2 && nickel != 12)
-        cout << ending_two_four;
-    else if (nickel % 10 == 3 && nickel != 13)
-        cout << ending_two_four;
-    else if (nickel % 10 == 4 && nickel != 14)
-        cout << ending_two_four;
-    else
-        cout << ending_others;
-    }
-    else
-        cout << "";
-    cout << "\n";
-    
-    cout << " У вас ";
-    if (dime != 0)
-    {
-        cout << dime << dime_str;
-    if (dime % 10 == 1 &&  dime != 11)
-        cout << ending_one;
-    else if (dime % 10 == 2 && dime != 12)
-        cout << ending_two_four;
-    else if (dime % 10 == 3 && dime != 13)
-        cout << ending_two_four;
-    else if (dime % 10 == 4 && dime != 14)
-        cout << ending_two_four;
-    else
-        cout << ending_others;
-    }
-    else
-        cout << "";
-    cout << "\n";
-    
-    cout << " У вас ";
-    if (quarter != 0)
-    {
-        cout << quarter << quarter_str;
-    if (quarter % 10 == 1 &&  quarter != 11)
-        cout << ending_one;
-    else if (quarter % 10 == 2 && quarter != 12)
-        cout << ending_two_four;
-    else if (quarter % 10 == 3 && quarter != 13)
-        cout << ending_two_four;
-    else if (quarter % 10 == 4 && quarter != 14)
-        cout << ending_two_four;
-    else
-        cout << ending_others;
-    }
-    else
-        cout << "";
-    cout << "\n";
-    
-    cout << " У вас ";
-    if (half_dollar != 0)
-    {
-        cout << half_dollar << half_dollar_str;
-    if (half_dollar % 10 == 1 &&  half_dollar != 11)
-        cout << ending_one;
-    else if (half_dollar % 10 == 2 && half_dollar != 12)
-        cout << ending_two_four;
-    else if (half_dollar % 10 == 3 && half_dollar != 13)
-        cout << ending_two_four;
-    else if (half_dollar % 10 == 4 && half_dollar != 14)
-        cout << ending_two_four;
-    else
-        cout << ending_others;
-    }
-    else
-        cout << "";
-    cout << "\n";
-    
-    cout << " У вас ";
-    if (dollar != 0)
-    {
-        cout << dollar << dollar_str;
-    if (dollar % 10 == 1 &&  dollar != 11)
-        cout << ending_one;
-    else if (dollar % 10 == 2 && dollar != 12)
-        cout << ending_two_four;
-    else if (dollar % 10 == 3 && dollar != 13)
-        cout << ending_two_four;
-    else if (dollar % 10 == 4 && dollar != 14)
-        cout << ending_two_four;
-    else
-        cout << ending_others;
-    }
-    else
-        cout << "";
-    cout << "\n";
+    coins_naming(coin, coin_str);
+    coins_naming(nickel, nickel_str);
+    coins_naming(dime, dime_str);
+    coins_naming(quarter, quarter_str);
+    coins_naming(half_dollar, half_dollar_str);
+    coins_naming(dollar, dollar_str);
     
     sum_of_coins = dollar*100 + sum_of_coins;
     cout << "Общая стоимость ваших монет ";
@@ -180,7 +96,6 @@ int main()
         else
             cout << coins << " центов";
         
-    
-    cout << "\n";
+        cout << "\n";
     return 0;
 }
