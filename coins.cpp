@@ -25,6 +25,21 @@ void coins_naming (const int & coin_num, const string & coin_name)
     cout << "\n";
 }
 
+void cash_summary (const int &coins, const string &coin_name)
+{
+    if (coins % 10 == 1 &&  coins != 11)
+        cout << coins << coin_name;
+    else if (coins % 10 == 2 && coins != 12)
+        cout << coins << coin_name <<"а ";
+    else if (coins % 10 == 3 && coins != 13)
+        cout << coins << coin_name <<"а ";
+    else if (coins % 10 == 4 && coins != 14)
+        cout << coins << coin_name <<"а ";
+    else if (coins == 0)
+        cout << "";
+    else
+        cout << coins << coin_name <<"ов ";
+}
 
 int main()
 {
@@ -47,18 +62,19 @@ int main()
     sum_of_coins = coin;
     cout << "Введите количество пятицентовых монет:\n";
     cin >> nickel;
-    sum_of_coins = nickel*5 + sum_of_coins;
+    sum_of_coins += nickel*5;
     cout << "Введите количество десятицентовых монет:\n";
     cin >> dime;
-    sum_of_coins = dime*10 + sum_of_coins;
+    sum_of_coins += dime*10;
     cout << "Введите количество двадцатипятицентовых монет:\n";
     cin >> quarter;
-    sum_of_coins = quarter*25 + sum_of_coins;
+    sum_of_coins += quarter*25;
     cout << "Введите количество пятидесятицентовых монет:\n";
     cin >> half_dollar;
-    sum_of_coins = half_dollar*50 + sum_of_coins;
+    sum_of_coins += half_dollar*50;
     cout << "Введите количество долларовых монет:\n";
     cin >> dollar;
+    sum_of_coins += dollar*100;
     
     coins_naming(coin, coin_str);
     coins_naming(nickel, nickel_str);
@@ -67,35 +83,9 @@ int main()
     coins_naming(half_dollar, half_dollar_str);
     coins_naming(dollar, dollar_str);
     
-    sum_of_coins = dollar*100 + sum_of_coins;
     cout << "Общая стоимость ваших монет ";
-    int dollars = sum_of_coins / 100;
-    int coins =sum_of_coins % 100;
-  
-        if (dollars % 10 == 1 &&  dollars != 11)
-            cout << dollars << " доллар ";
-        else if (dollars % 10 == 2 && dollars != 12)
-            cout << dollars << " доллара ";
-        else if (dollars % 10 == 3 && dollars != 13)
-            cout << dollars << " доллара ";
-        else if (dollars % 10 == 4 && dollars != 14)
-            cout << dollars << " доллара ";
-        else if (dollars == 0)
-            cout << "";
-        else
-            cout << dollars << " долларов ";
-
-        if (coins % 10 == 1 &&  coins != 11)
-            cout << coins << " цент";
-        else if (coins % 10 == 2 && coins != 12)
-            cout << coins << " цента";
-        else if (coins % 10 == 3 && coins != 13)
-            cout << coins << " цента";
-        else if (coins % 10 == 4 && coins != 14)
-            cout << coins << " цента";
-        else
-            cout << coins << " центов";
-        
-        cout << "\n";
+    cash_summary(sum_of_coins / 100, dollar_str);
+    cash_summary(sum_of_coins % 100, cent_str);
+    cout << "\n";
     return 0;
 }
