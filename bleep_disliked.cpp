@@ -2,8 +2,9 @@
 
 string bleep(const string &temp){
     string disliked = "broccoli";
+    string disliked_1 = "shit";
     string bleeped = "BLEEP";
-    if (temp != disliked)
+    if (temp != disliked || temp != disliked_1)
         return temp;
     else
         return bleeped;
