@@ -1,3 +1,4 @@
+
 #include "std_lib_facilities.h"
 
 void dimension_name_check() {
@@ -33,6 +34,8 @@ int main()
     double curr_val = 0.0;
     double max_val = 0.0;
     double min_val = 0.0;
+    double sum_val = 0.0;
+    int val_counter = 0;
     string dimension_name = "";
     cout << "Введите число и через пробел "
     << "единицу измерения(m, cm, inch, ft)\n";
@@ -56,11 +59,15 @@ int main()
                     cout << curr_val
                     << " см наименьшее из ранее введенных\n";
                 }
+                sum_val += curr_val;
+                ++val_counter;
                 break;
             case false:
                 cout << "Неподходящая единица измерения!\n";
                 break;
         }
     }
+    cout << "Сумма всех измерний равна " << sum_val/100.0 << " м.\n";
+    cout << "Количество введенных измерений равно " << val_counter << "\n";
     return 0;
 }
