@@ -1,10 +1,6 @@
 
 #include "std_lib_facilities.h"
 
-void dimension_name_check() {
-    
-}
-
 double val_converter (double val, string name) {
     double m = 100.0;
     double ft = 12;
