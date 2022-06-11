@@ -1,6 +1,15 @@
 
 #include "std_lib_facilities.h"
 
+bool check_dimension_name (string name) {
+    if (name == "m" || name == "cm")
+        return true;
+    else if (name == "ft" || name == "inch")
+        return true;
+    else
+        return false;
+}
+
 double val_converter (double val, string name) {
     double m = 100.0;
     double ft = 12;
@@ -16,14 +25,7 @@ double val_converter (double val, string name) {
     return val;
 }
 
-bool check_dimension_name (string name) {
-    if (name == "m" || name == "cm")
-        return true;
-    else if (name == "ft" || name == "inch")
-        return true;
-    else
-        return false;
-}
+
 
 int main()
 {
@@ -31,6 +33,7 @@ int main()
     double max_val = 0.0;
     double min_val = 0.0;
     double sum_val = 0.0;
+    vector<double> values;
     int val_counter = 0;
     string dimension_name = "";
     cout << "Введите число и через пробел "
@@ -55,6 +58,7 @@ int main()
                     cout << curr_val
                     << " см наименьшее из ранее введенных\n";
                 }
+                values.push_back(curr_val/100.0);
                 sum_val += curr_val;
                 ++val_counter;
                 break;
@@ -65,5 +69,9 @@ int main()
     }
     cout << "Сумма всех измерний равна " << sum_val/100.0 << " м.\n";
     cout << "Количество введенных измерений равно " << val_counter << "\n";
+    sort(values);
+    for(auto val : values) {
+        cout << val << " м.\n";
+    }
     return 0;
 }
