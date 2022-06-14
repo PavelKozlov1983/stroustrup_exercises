@@ -11,7 +11,7 @@ int main()
     << "Для выхода используйте символ |\n";
     while (operation != '|') {
         cin >> first_val >> second_val >> operation;
-        if (first_val || first_val) {
+        if (first_val || second_val) {
         switch (operation) {
             case '|':
                 break;
@@ -34,11 +34,17 @@ int main()
                 << result_val << "\n";
                 break;
             case '/':
+                if (second_val == 0) {
+                    cout << "Делить на 0 нельзя!\n";
+                    break;
+                }
+                else {
                 result_val = first_val / second_val;
                 cout << "Частное чисел " << first_val
                 << " и " << second_val << " равно "
                 << result_val << "\n";
                 break;
+                }
             default:
                 cout << "Введен неверный символ операции!\n";
                 break;
