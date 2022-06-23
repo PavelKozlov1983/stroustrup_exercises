@@ -1,3 +1,5 @@
+#include "std_lib_facilities.h"
+
 int main()
 {
     double a = 0.0;
