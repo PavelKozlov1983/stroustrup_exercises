@@ -28,25 +28,41 @@ void bulls_cows(const vector<int>& comp_nums,  // сравнение значе�
                 ++cows;
         }
     }
-    cout << "cows " << cows << "\n"
-    << "bulls " << bulls << "\n";
+    cout << "коров " << cows << "\n"
+    << "быков " << bulls << "\n";
 }
 
 int main()
 {
     constexpr int num_size = 4; // фиксируем размер вектора для игры быки и коровы
-    vector<int> comp_nums{2, 4, 5, 9};
-    vector<int> user_nums(num_size);
-    cout << "Введите 4 числа\n";
-    for (int i = 0; i < num_size; ++i){
-        int n;
-        cin >> n;
-        if (unique_num(user_nums, n) == true)
-            user_nums[i] = n;
-        else
-            error("повторять числа нельзя!\n");
+    bool choise = true;            // переменная для продолжения игры
+    int user_num = 0;
+    int comp_num = 0;
+    while (choise) {
+        vector<int> comp_nums(num_size);
+        vector<int> user_nums(num_size);
+        cout << "Введите 4 числа\n";
+        for (int i = 0; i < num_size; ++i){     // заполняем вектор чисел пользователя
+            cin >> user_num;
+            if (unique_num(user_nums, user_num) == true) {
+                user_nums[i] = user_num;
+            }
+            else
+                error("повторять числа нельзя!\n");
+        }
+        srand(user_num);
+        comp_num = randint(10);
+        for (int i = 0; i < num_size; ++i) {     // заполняем вектор машины
+            while (!unique_num(comp_nums, comp_num)) {
+                comp_num = randint(9);
+            }
+            comp_nums[i] = comp_num;
+        }
+        
+        bulls_cows(comp_nums, user_nums);
+        
+        cout <<" Сыграем еще? 1 - да, 0 - нет.\n";
+        cin >> choise;
     }
-    bulls_cows(comp_nums, user_nums);
-    
     return 0;
 }
