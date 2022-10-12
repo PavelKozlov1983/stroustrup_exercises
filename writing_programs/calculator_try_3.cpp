@@ -142,8 +142,10 @@ try
         else if (t.kind == '=')        // ';' for "print now"
             cout << "=" << val << '\n';
         else
+        {
             ts.putback(t);
         val = expression();
+        }
         
     }
 }
