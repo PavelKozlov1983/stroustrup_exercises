@@ -1,3 +1,4 @@
+
 #include "std_lib_facilities.h"
 
 //------------------------------------------------------------------------------
@@ -157,46 +158,56 @@ public:
 
 
 //------------------------------------------------------------------------------
+class Symbol_table {
+public:
+	double get_value(string s);
+	void set_value(string s, double d);
+	bool is_declared(string s);
+	double define_name(string s, double val, bool var = true);
+private:
 
-vector<Variable> var_table;
+	vector<Variable> var_table;
+};
 
 //------------------------------------------------------------------------------
-
-double get_value(string s) // return the value of the Variable names s
-{
-	for (const Variable& v : var_table)
-		if (v.name == s) return v.value;
-	error("get: undefined name ", s);
-}
-
-void set_value(string s, double d) // set the Variable named s to d
-{
-	for (Variable v : var_table)
-		if (v.name == s) {
-			if(v.var == false) error(s, " is a constant");
-			v.value = d;
-			return;
-		}
-	error("set: undefined name ", s);
-}
-
-bool is_declared(string s) // is var already in var_table?
-{
-	for (const Variable& v : var_table)
-		if (v.name == s) return true;
-	return false;
+// return the value of the Variable names s
+double Symbol_table::get_value(string s) {
+	for (const Variable& v : Symbol_table::var_table)
+			if (v.name == s) return v.value;
+		error("get: undefined name ", s);
 }
 
 //------------------------------------------------------------------------------
+// set the Variable named s to d
+void Symbol_table::set_value(string s, double d) {
+	for (Variable v : Symbol_table::var_table)
+			if (v.name == s) {
+				if(v.var == false) error(s, " is a constant");
+				v.value = d;
+				return;
+			}
+		error("set: undefined name ", s);
+}
 
-double define_name(string s, double val, bool var = true)
+//------------------------------------------------------------------------------
+// is var already in var_table?
+bool Symbol_table::is_declared(string s) {
+	for (const Variable& v : Symbol_table::var_table)
+			if (v.name == s) return true;
+		return false;
+}
+
+//------------------------------------------------------------------------------
 // add (s,val,var) to var_table
-{
-	if (is_declared(s)) error(s, " declared twice");
-	var_table.push_back(Variable(s, val, var));
-	return val;
+double Symbol_table::define_name(string s, double val, bool var ) {
+	if (Symbol_table::is_declared(s)) error(s, " declared twice");
+	Symbol_table::var_table.push_back(Variable(s, val, var));
+		return val;
 }
 
+//------------------------------------------------------------------------------
+
+Symbol_table st;
 //------------------------------------------------------------------------------
 
 double expression();  // declaration so that primary() can call expression()
@@ -244,13 +255,13 @@ double primary()  // deal with numbers and parentheses
 		if (next.kind == '=') // handle name = expression
 			{
 				double d = expression();
-				set_value(t.name, d);
+				st.set_value(t.name, d);
 				return d;
 			}
 		else
 		{
 			ts.putback(next);
-			return get_value(t.name);
+			return st.get_value(t.name);
 		}
 	}
 	default:
@@ -325,7 +336,7 @@ double declaration(Token k)
 	if (t2.kind != '=') error("= missing in declaration of ", name);
 
 	double d = expression();
-	define_name(var_name, d, k.kind == let);
+	st.define_name(var_name, d, k.kind == let);
 	return d;
 }
 
@@ -377,9 +388,9 @@ int main()
 
 try {
 
-	define_name("pi", 3.1415926535);
-	define_name("e", 2.7182818284);
-	define_name("k", 1000);
+	st.define_name("pi", 3.1415926535);
+	st.define_name("e", 2.7182818284);
+	st.define_name("k", 1000);
 
 	 cout << "Welcome to calculator!\n"
 	    <<"Please enter expression. Use digits, ., +, -, *, = /\n";
